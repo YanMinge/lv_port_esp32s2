@@ -117,7 +117,7 @@ static void guiTask(void *pvParameter) {
     lv_disp_drv_register(&disp_drv);
 
     /* Register an input device when enabled on the menuconfig */
-#if CONFIG_LVGL_TOUCH_CONTROLLER != TOUCH_CONTROLLER_NONE
+#if CONFIG_LV_TOUCH_CONTROLLER != 0
     lv_indev_drv_t indev_drv;
     lv_indev_drv_init(&indev_drv);
     indev_drv.read_cb = touch_driver_read;

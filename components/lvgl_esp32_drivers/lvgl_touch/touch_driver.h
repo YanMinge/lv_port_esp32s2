@@ -28,6 +28,8 @@ extern "C" {
 #include "FT81x.h"
 #elif defined (CONFIG_LV_TOUCH_CONTROLLER_RA8875)
 #include "ra8875_touch.h"
+#elif defined (CONFIG_LV_TOUCH_CONTROLLER_NS2016)
+#include "ns2016.h"
 #endif
 
 /*********************

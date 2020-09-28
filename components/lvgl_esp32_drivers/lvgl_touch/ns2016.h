@@ -1,5 +1,6 @@
+#ifndef __NS2016_H
 /*
-* Copyright © 2020 Wolfgang Christl
+* Copyright © 2020 Matatalab Yanminge
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 * software and associated documentation files (the “Software”), to deal in the Software 
@@ -18,26 +19,43 @@
 * SOFTWARE.
 */
 
-#include <driver/i2c.h>
-#include <esp_log.h>
+#define __NS2016_H
 
-#define I2C_MASTER_FREQ_HZ 100000                             /* 100kHz*/
-#define I2C_MASTER_TX_BUF_DISABLE 5                           /* I2C master doesn't need buffer */
-#define I2C_MASTER_RX_BUF_DISABLE 5                           /* I2C master doesn't need buffer */
+#include <lvgl/src/lv_hal/lv_hal.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define NS2016_I2C_SLAVE_ADDR   0x48
+#define NS2016_MSB_MASK         0xFF
+#define NS2016_LSB_MASK         0xF0
+
+#define NS2016_READ_X           0xC0
+#define NS2016_READ_Y           0xD0
+#define NS2016_READ_Z1          0xE0
+#define NS2016_READ_Z2          0xF0
+
+typedef struct {
+    bool inited;
+} ns2016_status_t;
 
 /**
- * @brief ESP32 I2C init as master
- * @ret ESP32 error code
- */
-esp_err_t i2c_master_init(void) {
-    int i2c_master_port = I2C_NUM_0;
-    i2c_config_t conf;
-    conf.mode = I2C_MODE_MASTER;
-    conf.sda_io_num = CONFIG_LV_TOUCH_I2C_SDA;
-    conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
-    conf.scl_io_num = CONFIG_LV_TOUCH_I2C_SCL;
-    conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
-    conf.master.clk_speed = I2C_MASTER_FREQ_HZ;
-    i2c_param_config(i2c_master_port, &conf);
-    return i2c_driver_install(i2c_master_port, conf.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);
+  * @brief  Initialize for FT6x36 communication via I2C
+  * @param  dev_addr: Device address on communication Bus (I2C slave address of FT6X36).
+  * @retval None
+  */
+void ns2016_init(uint16_t dev_addr);
+
+/**
+  * @brief  Get the touch screen X and Y positions values. Ignores multi touch
+  * @param  drv:
+  * @param  data: Store data here
+  * @retval Always false
+  */
+bool ns2016_read(lv_indev_drv_t *drv, lv_indev_data_t *data);
+
+#ifdef __cplusplus
 }
+#endif
+#endif /* __NS2016_H */
