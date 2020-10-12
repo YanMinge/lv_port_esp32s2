@@ -1,4 +1,4 @@
-#ifndef __NS2016_H
+#ifndef __GT615_H
 /*
 * Copyright © 2020 Matatalab Yanminge
 
@@ -19,7 +19,7 @@
 * SOFTWARE.
 */
 
-#define __NS2016_H
+#define __GT615_H
 
 #include <lvgl/src/lv_hal/lv_hal.h>
 
@@ -27,25 +27,18 @@
 extern "C" {
 #endif
 
-#define NS2016_I2C_SLAVE_ADDR   0x48
-#define NS2016_MSB_MASK         0xFF
-#define NS2016_LSB_MASK         0xF0
-
-#define NS2016_READ_X           0xC0
-#define NS2016_READ_Y           0xD0
-#define NS2016_READ_Z1          0xE0
-#define NS2016_READ_Z2          0xF0
+#define GT615_I2C_SLAVE_ADDR   0x14
 
 typedef struct {
     bool inited;
-} ns2016_status_t;
+} gt615_status_t;
 
 /**
-  * @brief  Initialize for NS2016 communication via I2C
-  * @param  dev_addr: Device address on communication Bus (I2C slave address of NS2016).
+  * @brief  Initialize for GT615 communication via I2C
+  * @param  dev_addr: Device address on communication Bus (I2C slave address of GT615).
   * @retval None
   */
-void ns2016_init(uint16_t dev_addr);
+void gt615_init(uint16_t dev_addr);
 
 /**
   * @brief  Get the touch screen X and Y positions values. Ignores multi touch
@@ -53,9 +46,9 @@ void ns2016_init(uint16_t dev_addr);
   * @param  data: Store data here
   * @retval Always false
   */
-bool ns2016_read(lv_indev_drv_t *drv, lv_indev_data_t *data);
+bool gt615_read(lv_indev_drv_t *drv, lv_indev_data_t *data);
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* __NS2016_H */
+#endif /* __GT615_H */

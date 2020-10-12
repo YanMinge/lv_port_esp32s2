@@ -22,8 +22,8 @@
 #include <esp_log.h>
 
 #define I2C_MASTER_FREQ_HZ 100000                             /* 100kHz*/
-#define I2C_MASTER_TX_BUF_DISABLE 5                           /* I2C master doesn't need buffer */
-#define I2C_MASTER_RX_BUF_DISABLE 5                           /* I2C master doesn't need buffer */
+#define I2C_MASTER_TX_BUF_DISABLE 0                           /* I2C master doesn't need buffer */
+#define I2C_MASTER_RX_BUF_DISABLE 0                           /* I2C master doesn't need buffer */
 
 /**
  * @brief ESP32 I2C init as master
@@ -34,9 +34,9 @@ esp_err_t i2c_master_init(void) {
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
     conf.sda_io_num = CONFIG_LV_TOUCH_I2C_SDA;
-    conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
+    conf.sda_pullup_en = GPIO_PULLUP_DISABLE;
     conf.scl_io_num = CONFIG_LV_TOUCH_I2C_SCL;
-    conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
+    conf.scl_pullup_en = GPIO_PULLUP_DISABLE;
     conf.master.clk_speed = I2C_MASTER_FREQ_HZ;
     i2c_param_config(i2c_master_port, &conf);
     return i2c_driver_install(i2c_master_port, conf.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);

@@ -23,6 +23,8 @@ void touch_driver_init(void)
     ra8875_touch_init();
 #elif defined (CONFIG_LV_TOUCH_CONTROLLER_NS2016)
     ns2016_init(NS2016_I2C_SLAVE_ADDR);
+#elif defined (CONFIG_LV_TOUCH_CONTROLLER_GT615)
+    gt615_init(GT615_I2C_SLAVE_ADDR);
 #endif
 }
 
@@ -44,6 +46,8 @@ bool touch_driver_read(lv_indev_drv_t *drv, lv_indev_data_t *data)
     res = ra8875_touch_read(drv, data);
 #elif defined (CONFIG_LV_TOUCH_CONTROLLER_NS2016)
     res = ns2016_read(drv, data);
+#elif defined (CONFIG_LV_TOUCH_CONTROLLER_GT615)
+    res = gt615_read(drv, data);
 #endif
 
     return res;

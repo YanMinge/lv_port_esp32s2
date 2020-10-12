@@ -76,8 +76,8 @@ esp_err_t i2c_master_write_reg(i2c_port_t i2c_num, uint8_t slaver_addr, uint8_t 
 }
 
 /**
-  * @brief  Initialize for FT6x36 communication via I2C
-  * @param  dev_addr: Device address on communication Bus (I2C slave address of FT6X36).
+  * @brief  Initialize for NS2016 communication via I2C
+  * @param  dev_addr: Device address on communication Bus (I2C slave address of NS2016).
   * @retval None
   */
 void ns2016_init(uint16_t dev_addr) {

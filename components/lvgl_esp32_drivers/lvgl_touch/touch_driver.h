@@ -30,6 +30,8 @@ extern "C" {
 #include "ra8875_touch.h"
 #elif defined (CONFIG_LV_TOUCH_CONTROLLER_NS2016)
 #include "ns2016.h"
+#elif defined (CONFIG_LV_TOUCH_CONTROLLER_GT615)
+#include "gt615.h"
 #endif
 
 /*********************
